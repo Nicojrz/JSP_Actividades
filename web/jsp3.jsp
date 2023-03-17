@@ -8,6 +8,7 @@
 <%@page import="java.util.List"%>
 <%@page import="source.Datos"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -62,14 +63,16 @@
             String guardar = null;
             String id = null;
             String editar = null;
-            Integer idx = null;
+            String accion = "guardar";
+            String actualizar = "guardar";
             Datos datos = null;
+            Integer idx = null;
             List<Datos>lista = null;
-            session = request.getSession(true);
             
-            if( session != null )
+            session = request.getSession(true);
+            if(session != null)
             {
-                if( session.getAttribute("lista") == null )
+                if(session.getAttribute("lista") == null)
                 {
                     session.setAttribute("lista", new ArrayList<Datos>());
                 }
@@ -80,51 +83,66 @@
             guardar = request.getParameter("guardar");
             id = request.getParameter("id");
             editar = request.getParameter("editar");
+            actualizar = request.getParameter("actualizar");
             
             if("Submit".equals(editar)) {
                 idx = Integer.parseInt(id);
                 if(idx<lista.size()) {
-                datos = lista.get(idx);
+                    datos = lista.get(idx);
+                }
+                accion = "actualizar";
             }
-            if("Submit".equals(guardar)) {
-                datos = new Datos();
+            
+            if("Submit".equals(guardar) || "Submit".equals(actualizar)) {
+                if("Submit".equals(guardar)) {
+                    datos = new Datos();
+                }
+                else {
+                    datos = lista.get(Integer.parseInt(id));
+                }
                 datos.setName(nombre);
                 datos.setGrade(Float.parseFloat(calif)); 
-                lista.add(datos);
-                
-            }
+                if("Submit".equals(guardar)) {
+                    lista.add(datos);
+                }
         %>
-        <h3 style="margin-left: 20%">Registro exitoso</h3>
+        <h3 style="margin-left: 20%; margin-top: 4%">Registro exitoso</h3>
         <a href="jsp3b.jsp" style="margin-left: 20%">Ir a jsp3b</a>
         <%
             }
-            if(datos == null)
-            {
-            datos = new Datos();
-            datos.setName("");
-            datos.setGrade(0f);
+            if(datos == null) {
+                datos = new Datos();
+                datos.setName("");
+                datos.setGrade(0f);
             }
-            if(!"Submit".equals(guardar))
+            if(!"Submit".equals(guardar) && !"Submit".equals(actualizar))
             {
         %>  
-        <form id="form1">
-            <table border="1">
-                <tr>
-                    <td>Nombre</td>
-                    <td><input id="nombre" name="nombre" type="text" value="<%=datos.getName()%>"/></td>
-
-                </tr>
-                <tr>
-                    <td>Calificación</td>
-                    <td><input id="calif" name="calif" type="number" value="<%=datos.getGrade()%>"/></td>
-                </tr>
-                <tr >
-                    <td colspan="2">
-                        <input type="submit" id="Guardar" name="guardar" />
-                    </td>
-                </tr>
-            </table>
-        </form>
+                <form id="form1">
+                    <table border="1">
+                        <tr>
+                            <td>Nombre</td>
+                            <td><input id="nombre" name="nombre" type="text" value="<%=datos.getName()%>"/></td>
+                        </tr>
+                        <tr>
+                            <td>Calificaci&oacute;n</td>
+                            <td><input id="calif" name="calif" type="number" value="<%=datos.getGrade()%>"/>
+                                <%
+                                    if("Submit".equals(editar)) {
+                                %>
+                                <input type="hidden" name="id" id="id" value="<%=id%>" />
+                                <%
+                                    }
+                                %>
+                            </td>
+                        </tr>
+                        <tr >
+                            <td colspan="2">
+                                <input type="submit" id="Guardar" name="<%=accion%>" />
+                            </td>
+                        </tr>
+                    </table>
+                </form>
         <%
             }
         %>

@@ -58,19 +58,20 @@
         
         <!-- CONTENIDO -->
         <% 
-            List<Datos> lista = null;
-            session = request.getSession( true );
             int i = 0;
+            List<Datos> lista = null;
             String id = null;
             String borrar = null;
-            String editar = null;
-            if( session != null )
+            session = request.getSession(true);
+            
+            if(session != null)
             {
                 if( session.getAttribute("lista") != null )
                 {
                     lista = (List)session.getAttribute("lista");
                 }
             }
+            
             id = request.getParameter("id");
             borrar = request.getParameter("borrar");
             if("Submit".equals(borrar)) {
@@ -98,17 +99,17 @@
           </thead>
           <tbody class="table-group-divider">
             <%
-                if( lista != null && !lista.isEmpty() )
+                if(lista != null && !lista.isEmpty())
                 {
-                for( Datos datos : lista)
+                for(Datos datos : lista)
                     {
             %>
             <tr>
                 <td><%=i+1%></td>
                 <td><%=i%></td>
                 <td><%=datos.getName()%></td>
-                <td><%=datos.getGrade()%></td>
-                <td><a href="jsp3b.jsp?id=<%=i%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i++%>&editar=Submit">Editar</a></td>
+                <td><%=datos.getGrade()%></td>  
+                <td><a href="jsp3b.jsp?id=<%=i%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i%>&editar=Submit">Editar</a></td>
             </tr>
             <%
                     }
