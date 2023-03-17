@@ -8,6 +8,10 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <link rel="shortcut icon" href="images/favicon.ico">
         <link rel="stylesheet" href="style.css" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400;600;700;800;900&display=swap" rel="stylesheet">
+
     </head>
     <body>
         <!-- SVG IMPORT -->
@@ -22,10 +26,10 @@
         </svg>
         
         <!-- NAVEGACIÓN -->
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar bg-body-secondary">
           <div class="container-fluid">
             <a class="navbar-brand" href="index.html" style="margin-left: 10%">JSP</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" style="margin-right: 10%">
               <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -34,7 +38,7 @@
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 10%">
                     Pr&aacute;cticas
                   </a>
-                  <ul class="dropdown-menu">
+                  <ul class="dropdown-menu bg-body-tertiary" style="margin-left: 10%; margin-right: 70%">
                     <li><a class="dropdown-item" href="jsp1.jsp">Pr&aacute;ctica 1</a></li>
                     <li><a class="dropdown-item" href="jsp2.jsp">Pr&aacute;ctica 2</a></li>
                     <li><a class="dropdown-item" href="jsp3.jsp">Pr&aacute;ctica 3</a></li>
@@ -48,37 +52,34 @@
         <h1 style="margin-top: 4%">Elige una pr&aacute;ctica de JSP</h1>
         
         <!-- CAJAS -->
-        <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 4%">
+        <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 2%">
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <img src="images/dados.png" class="card-img-top" alt="dados">
-            <div class="card-body">
+            <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Pr&aacute;ctica 1</h5>
-                <p class="card-text">Generador de numeros aleatorios</p>
-                <a href="jsp1.jsp" class="btn btn-primary">Ver</a>
+                <p class="card-text">N&uacute;meros aleatorios</p>
+                <a href="jsp1.jsp" class="btn btn-primary">Ir a la pr&aacute;ctica</a>
               </div>
             </div>
           </div>
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <img style="width: 90%" src="images/tabla.jpg" class="card-img-top" alt="dados">
-            <div class="card-body">
+            <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Pr&aacute;ctica 2</h5>
                 <p class="card-text">Tabla JSP</p>
-                <a href="jsp2.jsp" class="btn btn-primary">Ver</a>
+                <a href="jsp2.jsp" class="btn btn-primary">Ir a la pr&aacute;ctica</a>
               </div>
             </div>
           </div>
         </div>
         
-          <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 4%">
+          <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 2%">
           <div class="col-sm-6 mb-3 mb-sm-0">
-            <img src="images/formu.jpg" class="card-img-top" alt="dados">
-            <div class="card-body">
+            <div class="card">
               <div class="card-body">
                 <h5 class="card-title">Pr&aacute;ctica 3</h5>
                 <p class="card-text">Formulario JSP</p>
-                <a href="jsp3.jsp" class="btn btn-primary">Ver</a>
+                <a href="jsp3.jsp" class="btn btn-primary">Ir a la pr&aacute;ctica</a>
               </div>
             </div>
           </div>
@@ -87,7 +88,7 @@
               <div class="card-body">
                 <h5 class="card-title">Pr&aacute;ctica 4</h5>
                 <p class="card-text">No disponible</p>
-                <a href="#" class="btn btn-primary disabled">Ver</a>
+                <a href="#" class="btn btn-primary disabled">No disponible</a>
               </div>
             </div>
           </div>
