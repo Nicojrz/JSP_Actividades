@@ -1,9 +1,18 @@
+<%-- 
+    Document   : jsp2
+    Created on : 14 mar 2023, 13:14:12
+    Author     : Nicojrz
+--%>
+
+<%@page import="java.util.List"%>
+<%@page import="source.Datos"%>
+<%@page import="source.Negocio"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inicio</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <link rel="shortcut icon" href="images/favicon.ico">
@@ -45,54 +54,69 @@
         </nav>
         
         <!-- TÍTULO -->
-        <h1 style="margin-top: 4%">Elige una pr&aacute;ctica de JSP</h1>
+        <h1 style="margin-top: 4%">Formulario JSP</h1> <br>
         
-        <!-- CAJAS -->
-        <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 4%">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <img src="images/dados.png" class="card-img-top" alt="dados">
-            <div class="card-body">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 1</h5>
-                <p class="card-text">Generador de numeros aleatorios</p>
-                <a href="jsp1.jsp" class="btn btn-primary">Ver</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <img style="width: 90%" src="images/tabla.jpg" class="card-img-top" alt="dados">
-            <div class="card-body">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 2</h5>
-                <p class="card-text">Tabla JSP</p>
-                <a href="jsp2.jsp" class="btn btn-primary">Ver</a>
-              </div>
-            </div>
-          </div>
+        <!-- CONTENIDO -->
+        <% 
+            List<Datos> lista = null;
+            session = request.getSession( true );
+            int i = 0;
+            String id = null;
+            String borrar = null;
+            String editar = null;
+            if( session != null )
+            {
+                if( session.getAttribute("lista") != null )
+                {
+                    lista = (List)session.getAttribute("lista");
+                }
+            }
+            id = request.getParameter("id");
+            borrar = request.getParameter("borrar");
+            if("Submit".equals(borrar)) {
+                lista.remove(Integer.parseInt(id));
+            }
+        %>
+        <div style="margin-left: 20%">
+            <a href="jsp3.jsp">Regresar al JSP3</a>
         </div>
+            
+        <!-- TÍTULO -->
+        <h1 style="margin-top: 4%">Tabla de calificaciones</h1> <br>
         
-          <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 4%">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <img src="images/formu.jpg" class="card-img-top" alt="dados">
-            <div class="card-body">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 3</h5>
-                <p class="card-text">Formulario JSP</p>
-                <a href="jsp3.jsp" class="btn btn-primary">Ver</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 4</h5>
-                <p class="card-text">No disponible</p>
-                <a href="#" class="btn btn-primary disabled">Ver</a>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- CONTENIDO -->
         
+        <table class="table table-light table-sm table-responsive" style="margin-left: 10%; margin-right: 50%">
+          <thead>
+            <tr class="table-info">
+              <th scope="col">#</th>
+              <th scope="col">id</th>
+              <th scope="col">Nombre</th>
+              <th scope="col">Calificaci&oacute;n</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <%
+                if( lista != null && !lista.isEmpty() )
+                {
+                for( Datos datos : lista)
+                    {
+            %>
+            <tr>
+                <td><%=i+1%></td>
+                <td><%=i%></td>
+                <td><%=datos.getName()%></td>
+                <td><%=datos.getGrade()%></td>
+                <td><a href="jsp3b.jsp?id=<%=i%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i++%>&editar=Submit">Editar</a></td>
+            </tr>
+            <%
+                    }
+                }
+            %>
+          </tbody>
+        </table>
+            
         <!-- FOOTER -->
         <div class="container" style="margin-top: 4%; margin-left: 10%; margin-right: 10%">
           <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">

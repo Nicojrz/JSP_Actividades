@@ -43,6 +43,8 @@
                   </a>
                   <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="jsp1.jsp">Pr&aacute;ctica 1</a></li>
+                    <li><a class="dropdown-item" href="jsp2.jsp">Pr&aacute;ctica 2</a></li>
+                    <li><a class="dropdown-item" href="jsp3.jsp">Pr&aacute;ctica 3</a></li>
                   </ul>
                 </li>
             </div>

@@ -1,9 +1,18 @@
+<%-- 
+    Document   : jsp3
+    Created on : 17 mar 2023, 06:59:32
+    Author     : Nicojrz
+--%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="source.Datos"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Inicio</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>JSP Page</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
         <link rel="shortcut icon" href="images/favicon.ico">
@@ -38,60 +47,87 @@
                     <li><a class="dropdown-item" href="jsp1.jsp">Pr&aacute;ctica 1</a></li>
                     <li><a class="dropdown-item" href="jsp2.jsp">Pr&aacute;ctica 2</a></li>
                     <li><a class="dropdown-item" href="jsp3.jsp">Pr&aacute;ctica 3</a></li>
+                    <li><a class="dropdown-item" href="jsp3b.jsp">Pr&aacute;ctica 3b</a></li>
                   </ul>
                 </li>
             </div>
           </div>
         </nav>
         
-        <!-- TÍTULO -->
-        <h1 style="margin-top: 4%">Elige una pr&aacute;ctica de JSP</h1>
+        <h1>Formulario JSP</h1>
         
-        <!-- CAJAS -->
-        <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 4%">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <img src="images/dados.png" class="card-img-top" alt="dados">
-            <div class="card-body">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 1</h5>
-                <p class="card-text">Generador de numeros aleatorios</p>
-                <a href="jsp1.jsp" class="btn btn-primary">Ver</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <img style="width: 90%" src="images/tabla.jpg" class="card-img-top" alt="dados">
-            <div class="card-body">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 2</h5>
-                <p class="card-text">Tabla JSP</p>
-                <a href="jsp2.jsp" class="btn btn-primary">Ver</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-          <div class="row" style="margin-left: 10%; margin-right: 10%; margin-top: 4%">
-          <div class="col-sm-6 mb-3 mb-sm-0">
-            <img src="images/formu.jpg" class="card-img-top" alt="dados">
-            <div class="card-body">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 3</h5>
-                <p class="card-text">Formulario JSP</p>
-                <a href="jsp3.jsp" class="btn btn-primary">Ver</a>
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Pr&aacute;ctica 4</h5>
-                <p class="card-text">No disponible</p>
-                <a href="#" class="btn btn-primary disabled">Ver</a>
-              </div>
-            </div>
-          </div>
-        </div>
+           <%
+            String nombre = null;
+            String calif = null;
+            String guardar = null;
+            String id = null;
+            String editar = null;
+            Integer idx = null;
+            Datos datos = null;
+            List<Datos>lista = null;
+            session = request.getSession(true);
+            
+            if( session != null )
+            {
+                if( session.getAttribute("lista") == null )
+                {
+                    session.setAttribute("lista", new ArrayList<Datos>());
+                }
+                lista = (List)session.getAttribute("lista");
+            }
+            nombre = request.getParameter("nombre");
+            calif = request.getParameter("calif");
+            guardar = request.getParameter("guardar");
+            id = request.getParameter("id");
+            editar = request.getParameter("editar");
+            
+            if("Submit".equals(editar)) {
+                idx = Integer.parseInt(id);
+                if(idx<lista.size()) {
+                datos = lista.get(idx);
+            }
+            if("Submit".equals(guardar)) {
+                datos = new Datos();
+                datos.setName(nombre);
+                datos.setGrade(Float.parseFloat(calif)); 
+                lista.add(datos);
+                
+            }
+        %>
+        <h3 style="margin-left: 20%">Registro exitoso</h3>
+        <a href="jsp3b.jsp" style="margin-left: 20%">Ir a jsp3b</a>
+        <%
+            }
+            if(datos == null)
+            {
+            datos = new Datos();
+            datos.setName("");
+            datos.setGrade(0f);
+            }
+            if(!"Submit".equals(guardar))
+            {
+        %>  
+        <form id="form1">
+            <table border="1">
+                <tr>
+                    <td>Nombre</td>
+                    <td><input id="nombre" name="nombre" type="text" value="<%=datos.getName()%>"/></td>
+
+                </tr>
+                <tr>
+                    <td>Calificación</td>
+                    <td><input id="calif" name="calif" type="number" value="<%=datos.getGrade()%>"/></td>
+                </tr>
+                <tr >
+                    <td colspan="2">
+                        <input type="submit" id="Guardar" name="guardar" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+        <%
+            }
+        %>
         
         <!-- FOOTER -->
         <div class="container" style="margin-top: 4%; margin-left: 10%; margin-right: 10%">
