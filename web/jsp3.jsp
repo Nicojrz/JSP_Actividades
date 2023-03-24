@@ -57,7 +57,7 @@
         
         <h1>Formulario JSP</h1>
         
-           <%
+        <%
             String nombre = null;
             String calif = null;
             String guardar = null;
@@ -70,6 +70,7 @@
             List<Datos>lista = null;
             
             session = request.getSession(true);
+            
             if(session != null)
             {
                 if(session.getAttribute("lista") == null)
@@ -78,6 +79,7 @@
                 }
                 lista = (List)session.getAttribute("lista");
             }
+            
             nombre = request.getParameter("nombre");
             calif = request.getParameter("calif");
             guardar = request.getParameter("guardar");

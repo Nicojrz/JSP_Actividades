@@ -3,9 +3,9 @@ package source;
 import java.io.Serializable;
 
 /**
- *
  * @author Nicojrz
  */
+
 public class Cliente implements Serializable{
     private String nombre;
     private String apellidopat;

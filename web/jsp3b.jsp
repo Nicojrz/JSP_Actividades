@@ -99,18 +99,17 @@
           </thead>
           <tbody class="table-group-divider">
             <%
-                if(lista != null && !lista.isEmpty())
-                {
+                if(lista != null && !lista.isEmpty()) {
                 for(Datos datos : lista)
                     {
             %>
-            <tr>
-                <td><%=i+1%></td>
-                <td><%=i%></td>
-                <td><%=datos.getName()%></td>
-                <td><%=datos.getGrade()%></td>  
-                <td><a href="jsp3b.jsp?id=<%=i%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i%>&editar=Submit">Editar</a></td>
-            </tr>
+                <tr>
+                    <td><%=i%></td>
+                    <td><%=i+1%></td>
+                    <td><%=datos.getName()%></td>
+                    <td><%=datos.getGrade()%></td>  
+                    <td><a href="jsp3b.jsp?id=<%=i++%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i++%>&editar=Submit">Editar</a></td>
+                </tr>
             <%
                     }
                 }
