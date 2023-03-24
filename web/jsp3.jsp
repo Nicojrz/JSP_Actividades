@@ -55,7 +55,7 @@
           </div>
         </nav>
         
-        <h1>Formulario JSP</h1>
+        <h1 style="margin-top: 4%">Formulario JSP</h1>
         
         <%
             String nombre = null;
@@ -120,7 +120,7 @@
             if(!"Submit".equals(guardar) && !"Submit".equals(actualizar))
             {
         %>  
-                <form id="form1">
+        <form id="form1" style="margin-left: 20%; margin-top: 4%">
                     <table border="1">
                         <tr>
                             <td>Nombre</td>
