@@ -102,13 +102,14 @@
                 if(lista != null && !lista.isEmpty()) {
                 for(Datos datos : lista)
                     {
+                    int j = i+1;
             %>
                 <tr>
-                    <td><%=i%></td>
-                    <td><%=i+1%></td>
+                    <td><%=i++%></td>
+                    <td><%=j++%></td>
                     <td><%=datos.getName()%></td>
                     <td><%=datos.getGrade()%></td>  
-                    <td><a href="jsp3b.jsp?id=<%=i++%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i++%>&editar=Submit">Editar</a></td>
+                    <td><a href="jsp3b.jsp?id=<%=i-1%>&borrar=Submit">Borrar</a> <a href="jsp3.jsp?id=<%=i-1%>&editar=Submit">Editar</a></td>
                 </tr>
             <%
                     }
