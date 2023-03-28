@@ -23,9 +23,24 @@ public class ClienteList extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
             int i = 0;
             List<Cliente> clientes = null;
-            HttpSession session = null;
+            String id;
+            String borrar;
+            HttpSession session = request.getSession();
             
-            session = request.getSession( );
+            if(session != null)
+            {
+                if(session.getAttribute("lista") != null)
+                {
+                    clientes = (List) session.getAttribute("lista");
+                }
+            }
+            
+            id = request.getParameter("id");
+            borrar = request.getParameter("borrar");
+            if("submit".equals(borrar)) {
+                clientes.remove(Integer.parseInt(id));
+            }
+            
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
@@ -50,7 +65,7 @@ public class ClienteList extends HttpServlet {
                     out.println( String.format( "<td>%s</td>" , cliente.getApellidopat() ) );
                     out.println( String.format( "<td>%s</td>" , cliente.getApellidomat() ) );
                     out.println( String.format( "<td>%d</td>" , cliente.getEdad() ) );
-                    out.println( String.format( "<td><a href=\"#\">Borrar</a> <a href=\"#\">Editar</a></td>"  ) );
+                    out.println( String.format( "<td><a href=\"ClienteList?id="+(i++)+"&borrar=submit\">Borrar</a> <a href=\"#\">Editar</a></td>"  ) );
                     out.println("</tr>");
                 }
             }
